@@ -43,7 +43,7 @@ public:
     //}
     
 //protected:
-    PlayingState(){}
+    PlayingState(int speed);
     
 private:
     //static PlayingState m_PlayingState;

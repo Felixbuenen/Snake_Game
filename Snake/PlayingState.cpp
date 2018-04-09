@@ -10,6 +10,11 @@
 
 //PlayingState PlayingState::m_PlayingState;
 
+PlayingState::PlayingState(int speed)
+{
+    snake.speed = speed;
+}
+
 void PlayingState::Init()
 {
     cellSize   = 20;
@@ -27,7 +32,6 @@ void PlayingState::Init()
     int startY = gridHeight/2;
     
     snake.Init(5, cellSize, startX, startY);
-    snake.speed = 12;
     
     // setup food
     foodPiece.foodshape->setFillColor(sf::Color::Red);
