@@ -60,7 +60,6 @@ private:
     sf::Text timer_text;
     sf::Text food_text;
     sf::Text title_text;
-    sf::Font font;
     Snake snake;
     
     void DrawWalls(Game*);

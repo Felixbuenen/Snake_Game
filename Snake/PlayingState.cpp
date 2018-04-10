@@ -41,35 +41,21 @@ void PlayingState::Init()
     snakeClock.restart();
     timer.restart();
     
-    // load font
-    font.loadFromFile(resourcePath() + "sansation.ttf");
-    
+    // FIX USE OF CONSTANTS
     // setup snake title text
-    title_text.setString("S N A K E");
-    title_text.setStyle(sf::Text::Bold);
-    title_text.setCharacterSize(75);
-    title_text.setFont(font);
-    title_text.setFillColor(sf::Color::White);
-    sf::Vector2f textBounds(title_text.getLocalBounds().left + title_text.getLocalBounds().width,
-                            title_text.getLocalBounds().top  + title_text.getLocalBounds().height);
-    title_text.setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    title_text.setPosition(sf::Vector2f(1500.f/2.f, 100.f)); // FIX USE OF CONSTANT!
+    int x = 750;
+    int y = 100;
+    ResourceManager::GetInstance()->SetupText(title_text, "S N A K E", sf::Text::Bold, 75, x, y, sf::Color::White);
     
     // setup timer text
-    timer_text.setString("0:00");
-    timer_text.setStyle(sf::Text::Bold);
-    timer_text.setCharacterSize(75);
-    timer_text.setFont(font);
-    timer_text.setFillColor(sf::Color::Black);
-    timer_text.setPosition(sf::Vector2f(gridPos.x, 250.f)); // FIX USE OF CONSTANT!
+    x = gridPos.x;
+    y = 250;
+    ResourceManager::GetInstance()->SetupText(timer_text, "0:00", sf::Text::Bold, 75, x, y, sf::Color::Black);
     
     // setup food text
-    food_text.setString("Food: 0");
-    food_text.setStyle(sf::Text::Bold);
-    food_text.setCharacterSize(75);
-    food_text.setFont(font);
-    food_text.setFillColor(sf::Color::Black);
-    food_text.setPosition(sf::Vector2f(gridPos.x + gridWidth*cellSize - food_text.getLocalBounds().width, 250.f)); // FIX USE OF CONSTANT!
+    x = gridPos.x + gridWidth*cellSize - food_text.getLocalBounds().width;
+    y = 250;
+    ResourceManager::GetInstance()->SetupText(food_text, "Food: 0", sf::Text::Bold, 75, x, y, sf::Color::Black);
 }
 
 void PlayingState::CleanUp()

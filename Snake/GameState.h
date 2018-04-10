@@ -11,6 +11,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "ResourcePath.hpp"
+#include "ResourceManager.hpp"
 
 #include "Game.hpp"
 

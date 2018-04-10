@@ -16,7 +16,7 @@ void MenuState::Init()
     font.loadFromFile(resourcePath() + "sansation.ttf");
     
     // setup snake title text
-    t_snake.setString("S N A K E");
+    /*t_snake.setString("S N A K E");
     t_snake.setStyle(sf::Text::Bold);
     t_snake.setCharacterSize(100);
     t_snake.setFont(font);
@@ -24,10 +24,14 @@ void MenuState::Init()
     sf::Vector2f textBounds(t_snake.getLocalBounds().left + t_snake.getLocalBounds().width,
                             t_snake.getLocalBounds().top  + t_snake.getLocalBounds().height);
     t_snake.setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    t_snake.setPosition(sf::Vector2f(1500.f/2.f, 150.f)); // FIX USE OF CONSTANT!
+    t_snake.setPosition(sf::Vector2f(1500.f/2.f, 150.f)); // FIX USE OF CONSTANT!*/
+    int x = 750;
+    int y = 150;
+    ResourceManager::GetInstance()->SetupText(t_snake, "S N A K E", sf::Text::Bold,
+                                              100, x, y, sf::Color::White);
     
     // setup information text
-    t_inform.setString("Select level and press Space to start a new game!");
+    /*t_inform.setString("Select level and press Space to start a new game!");
     t_inform.setStyle(sf::Text::Bold);
     t_inform.setCharacterSize(60);
     t_inform.setFont(font);
@@ -35,7 +39,11 @@ void MenuState::Init()
     textBounds.x = t_inform.getLocalBounds().left + t_inform.getLocalBounds().width;
     textBounds.y = t_inform.getLocalBounds().top  + t_inform.getLocalBounds().height;
     t_inform.setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    t_inform.setPosition(sf::Vector2f(1500.f/2.f, 500.f)); // FIX USE OF CONSTANT!
+    t_inform.setPosition(sf::Vector2f(1500.f/2.f, 500.f)); // FIX USE OF CONSTANT!*/
+    x = 750;
+    y = 500;
+    ResourceManager::GetInstance()->SetupText(t_inform, "Select level and press Space to start a new game!", sf::Text::Bold,
+                                              60, x, y, sf::Color::White);
     
     // fill level vector
     //std::fill(levels.begin(), levels.end(), std::unique_ptr<sf::Text>(new sf::Text()));
@@ -44,35 +52,21 @@ void MenuState::Init()
     levels.push_back(std::unique_ptr<sf::Text>(new sf::Text()));
     
     // setup level texts
-    levels[(int)_EASY]->setString("EASY");
-    levels[(int)_EASY]->setStyle(sf::Text::Regular);
-    levels[(int)_EASY]->setCharacterSize(30);
-    levels[(int)_EASY]->setFont(font);
-    levels[(int)_EASY]->setFillColor(sf::Color::White);
-    textBounds.x = levels[(int)_EASY]->getLocalBounds().left + levels[(int)_EASY]->getLocalBounds().width;
-    textBounds.y = levels[(int)_EASY]->getLocalBounds().top  + levels[(int)_EASY]->getLocalBounds().height;
-    levels[(int)_EASY]->setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    levels[(int)_EASY]->setPosition(sf::Vector2f(1500.f/4.f, 850.f)); // FIX USE OF CONSTANT!
+    x = 1500 / 4;
+    y = 850;
+    ResourceManager::GetInstance()->SetupText(*levels[(int)_EASY], "EASY", sf::Text::Regular,
+                                              30, x, y, sf::Color::White);
     
-    levels[(int)_MEDIUM]->setString("MEDIUM");
-    levels[(int)_MEDIUM]->setStyle(sf::Text::Bold | sf::Text::Underlined);
-    levels[(int)_MEDIUM]->setCharacterSize(50);
-    levels[(int)_MEDIUM]->setFont(font);
-    levels[(int)_MEDIUM]->setFillColor(sf::Color::White);
-    textBounds.x = levels[(int)_MEDIUM]->getLocalBounds().left + levels[(int)_MEDIUM]->getLocalBounds().width;
-    textBounds.y = levels[(int)_MEDIUM]->getLocalBounds().top  + levels[(int)_MEDIUM]->getLocalBounds().height;
-    levels[(int)_MEDIUM]->setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    levels[(int)_MEDIUM]->setPosition(sf::Vector2f(1500.f/2.f, 850.f)); // FIX USE OF CONSTANT!
+    x = 1500 / 2;
+    y = 850;
+    ResourceManager::GetInstance()->SetupText(*levels[(int)_MEDIUM], "MEDIUM",
+                                              (sf::Text::Style)(sf::Text::Regular | sf::Text::Underlined),
+                                              50, x, y, sf::Color::White);
     
-    levels[(int)_HARD]->setString("HARD");
-    levels[(int)_HARD]->setStyle(sf::Text::Regular);
-    levels[(int)_HARD]->setCharacterSize(30);
-    levels[(int)_HARD]->setFont(font);
-    levels[(int)_HARD]->setFillColor(sf::Color::White);
-    textBounds.x = levels[(int)_HARD]->getLocalBounds().left + levels[(int)_HARD]->getLocalBounds().width;
-    textBounds.y = levels[(int)_HARD]->getLocalBounds().top  + levels[(int)_HARD]->getLocalBounds().height;
-    levels[(int)_HARD]->setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    levels[(int)_HARD]->setPosition(sf::Vector2f(1500.f/2.f + 1500.f/4.f, 850.f)); // FIX USE OF CONSTANT!
+    x = 1500/2 + 1500/4;
+    y = 850;
+    ResourceManager::GetInstance()->SetupText(*levels[(int)_HARD], "HARD", sf::Text::Regular,
+                                              30, x, y, sf::Color::White);
 
     currentLevel = Levels::_MEDIUM;
 }
