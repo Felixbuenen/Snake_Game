@@ -27,8 +27,22 @@ void ResourceManager::SetupText(sf::Text& text, const std::string& content,
     text.setCharacterSize(charSize);
     text.setFont(sans_font);
     text.setFillColor(col);
+    
     sf::Vector2f textBounds(text.getLocalBounds().left + text.getLocalBounds().width,
                             text.getLocalBounds().top  + text.getLocalBounds().height);
+    
     text.setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
     text.setPosition(sf::Vector2f(x, y));
+}
+
+// automatically scales text centered
+void ResourceManager::ScaleText(sf::Text& text, int charSize)
+{
+    text.setCharacterSize(charSize);
+    
+    sf::Vector2f textBounds(text.getLocalBounds().left + text.getLocalBounds().width,
+                            text.getLocalBounds().top  + text.getLocalBounds().height);
+    
+    text.setOrigin(textBounds.x / 2, textBounds.y / 2);
+    text.setPosition(text.getPosition());
 }

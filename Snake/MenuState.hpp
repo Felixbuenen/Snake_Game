@@ -33,16 +33,9 @@ public:
     void Update     (Game*);
     void Draw       (Game*);
     
-    //static MenuState* Instance()
-    //{
-    //    return &m_MenuState;
-    //}
-    
-//protected:
     MenuState(){}
     
 private:
-    //static MenuState m_MenuState;
     void ChangeLevel(int dir);
     Levels currentLevel;
     

@@ -8,45 +8,24 @@
 
 #include "MenuState.hpp"
 
-//MenuState MenuState::m_MenuState;
-
 void MenuState::Init()
 {
     // load font
     font.loadFromFile(resourcePath() + "sansation.ttf");
     
     // setup snake title text
-    /*t_snake.setString("S N A K E");
-    t_snake.setStyle(sf::Text::Bold);
-    t_snake.setCharacterSize(100);
-    t_snake.setFont(font);
-    t_snake.setFillColor(sf::Color::White);
-    sf::Vector2f textBounds(t_snake.getLocalBounds().left + t_snake.getLocalBounds().width,
-                            t_snake.getLocalBounds().top  + t_snake.getLocalBounds().height);
-    t_snake.setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    t_snake.setPosition(sf::Vector2f(1500.f/2.f, 150.f)); // FIX USE OF CONSTANT!*/
     int x = 750;
     int y = 150;
     ResourceManager::GetInstance()->SetupText(t_snake, "S N A K E", sf::Text::Bold,
                                               100, x, y, sf::Color::White);
     
     // setup information text
-    /*t_inform.setString("Select level and press Space to start a new game!");
-    t_inform.setStyle(sf::Text::Bold);
-    t_inform.setCharacterSize(60);
-    t_inform.setFont(font);
-    t_inform.setFillColor(sf::Color::White);
-    textBounds.x = t_inform.getLocalBounds().left + t_inform.getLocalBounds().width;
-    textBounds.y = t_inform.getLocalBounds().top  + t_inform.getLocalBounds().height;
-    t_inform.setOrigin(textBounds.x / 2.f, textBounds.y / 2.f);
-    t_inform.setPosition(sf::Vector2f(1500.f/2.f, 500.f)); // FIX USE OF CONSTANT!*/
     x = 750;
     y = 500;
     ResourceManager::GetInstance()->SetupText(t_inform, "Select level and press Space to start a new game!", sf::Text::Bold,
                                               60, x, y, sf::Color::White);
     
     // fill level vector
-    //std::fill(levels.begin(), levels.end(), std::unique_ptr<sf::Text>(new sf::Text()));
     levels.push_back(std::unique_ptr<sf::Text>(new sf::Text()));
     levels.push_back(std::unique_ptr<sf::Text>(new sf::Text()));
     levels.push_back(std::unique_ptr<sf::Text>(new sf::Text()));
@@ -91,10 +70,9 @@ void MenuState::HandleInput(Game* game, sf::Event& event)
     if(event.type == sf::Event::KeyPressed)
     {
         // ...switch to game.
-        //game->ChangeState(PlayingState::Instance());
         if (event.key.code == sf::Keyboard::Space)
         {
-            int speed = 34358;
+            int speed;
             
             switch (currentLevel)
             {
@@ -113,6 +91,8 @@ void MenuState::HandleInput(Game* game, sf::Event& event)
             
             game->ChangeState(new PlayingState(speed));
         }
+        
+        // switch menu selection
         if (event.key.code == sf::Keyboard::Left ) ChangeLevel(-1);
         if (event.key.code == sf::Keyboard::Right) ChangeLevel(1);
     }
@@ -134,20 +114,20 @@ void MenuState::Draw(Game* game)
 
 void MenuState::ChangeLevel(int dir)
 {
+    // determine new current level
     int newLevel = (int)currentLevel + dir;
     newLevel = newLevel < 0 ? 0 : newLevel;
     newLevel = newLevel > 2 ? 2 : newLevel;
     
-    // set old current level to smaller text
+    // scale old selected text down
     levels[(int)currentLevel]->setStyle(sf::Text::Regular);
-    levels[(int)currentLevel]->setCharacterSize(30);
+    ResourceManager::GetInstance()->ScaleText(*levels[(int)currentLevel], 30);
     
+    // scale new selected text up
     currentLevel = (Levels)newLevel;
     levels[(int)currentLevel]->setStyle(sf::Text::Underlined | sf::Text::Bold);
-    levels[(int)currentLevel]->setCharacterSize(50);
+    ResourceManager::GetInstance()->ScaleText(*levels[(int)currentLevel], 50);
 }
-
-// position text void
 
 
 

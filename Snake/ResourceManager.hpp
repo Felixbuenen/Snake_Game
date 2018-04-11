@@ -17,6 +17,8 @@ public:
     static ResourceManager* GetInstance() { return &resourceManager; }
     
     void SetupText(sf::Text&, const std::string&, const sf::Text::Style&, int charSize, int x, int y, const sf::Color&);
+    void ScaleText(sf::Text&, int charSize);
+    
     sf::Font* GetFont() { return &sans_font; }
     
 private:
